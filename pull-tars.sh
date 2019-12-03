@@ -17,7 +17,7 @@ for file in $(curl -SsL $dir_url | sed -nE 's|.*href="(mDNS[^"]+)".*|\1|p'); do
     wget $file_url
     tar -xf $file
     rm $file
-    mv $dir/* .
+    mv $(find $dir -depth 1) .
     rmdir $dir
     git add .
     git commit -m "update to version $version from $file"
