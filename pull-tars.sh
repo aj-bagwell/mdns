@@ -6,7 +6,7 @@ cd $(realpath $(dirname $0))
 
 dir_url="https://opensource.apple.com/tarballs/mDNSResponder/"
 
-for file in $(curl -SsL $dir_url | sed -nE 's|.*href="(mDNS[^"]+)".*|\1|p'); do
+for file in $(curl -SsL $dir_url | sed -nE 's|.*href="?(mDNS[^">]+)[">].*|\1|p' | tac); do
   version="$(echo $file | sed -E 's|mDNSResponder-(.*).tar.gz|\1|')"
   dir="mDNSResponder-$version"
 
