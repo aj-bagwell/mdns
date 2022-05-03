@@ -16489,9 +16489,8 @@ typedef struct
 }	ProbeConflictTestCase;
 
 #define kPCTProgPreWait			"wait 1000;"	// Wait 1 second before sending gratuitous response.
-#define kPCTProgPostWait		"wait 10000;"	// Wait 10 seconds after sending gratuitous response.
-												// This allows ~2.75 seconds for probing, ~5 seconds for a rename, and
-												// a 2 second fudge factor for unexpected system delays.
+#define kPCTProgPostWait		"wait 8000;"	// Wait 8 seconds after sending gratuitous response.
+												// This allows ~2.75 seconds for probing and ~5 seconds for a rename.
 
 static const ProbeConflictTestCase		kProbeConflictTestCases[] =
 {

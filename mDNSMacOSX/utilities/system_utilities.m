@@ -21,7 +21,6 @@
 #if TARGET_OS_OSX
 #import <UniformTypeIdentifiers/UniformTypeIdentifiersPriv.h>
 #import <IOKit/platform/IOPlatformSupportPrivate.h>
-#import <SoftLinking/WeakLinking.h>
 #endif // TARGET_OS_OSX
 
 bool IsAppleInternalBuild(void)
@@ -30,49 +29,37 @@ bool IsAppleInternalBuild(void)
 }
 
 #if TARGET_OS_OSX
-WEAK_LINK_FORCE_IMPORT(_UTHardwareColorGetCurrentEnclosureColor);
-
-static util_enclosure_color_t
-_uti_get_enclosure_color_str(char * const out_str, uint8_t len, uint8_t *out_size)
-{
-	util_enclosure_color_t color_type = util_enclosure_color_none;
-	if (@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)) {
-		if(_UTHardwareColorGetCurrentEnclosureColor) {
-			UTHardwareColor enclosureColor;
-			if (_UTHardwareColorGetCurrentEnclosureColor(&enclosureColor)) {
-				switch (enclosureColor.type) {
-					case UTHardwareColorTypeRGB: {
-						int size = snprintf(out_str, len, "%u,%u,%u",
-											enclosureColor.rgb.r, enclosureColor.rgb.g, enclosureColor.rgb.b);
-						if (size > 0 && size < len) {
-							color_type = util_enclosure_color_rgb;
-							*out_size = size;
-						}
-						break;
-					}
-					case UTHardwareColorTypeIndexed: {
-						int size = snprintf(out_str, len, "%i", enclosureColor.index);
-						if (size > 0 && size < len) {
-							color_type = util_enclosure_color_index;
-							*out_size = size;
-						}
-						break;
-					}
-					default:
-						*out_size = 0;
-						break;
-				}
-			}
-		}
-	}
-	return color_type;
-}
-
 util_enclosure_color_t
 util_get_enclosure_color_str(char * const out_str, uint8_t len, uint8_t *out_size)
 {
-	util_enclosure_color_t color_type = _uti_get_enclosure_color_str(out_str, len, out_size);
-	if (color_type == util_enclosure_color_none) {
+	util_enclosure_color_t color_type = util_enclosure_color_none;
+	if (@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)) {
+		UTHardwareColor enclosureColor;
+		if (_UTHardwareColorGetCurrentEnclosureColor(&enclosureColor)) {
+			switch (enclosureColor.type) {
+				case UTHardwareColorTypeRGB: {
+					int size = snprintf(out_str, len, "%u,%u,%u",
+										enclosureColor.rgb.r, enclosureColor.rgb.g, enclosureColor.rgb.b);
+					if (size < len) {
+						color_type = util_enclosure_color_rgb;
+						*out_size = size;
+					}
+					break;
+				}
+				case UTHardwareColorTypeIndexed: {
+					int size = snprintf(out_str, len, "%i", enclosureColor.index);
+					if (size < len) {
+						color_type = util_enclosure_color_index;
+						*out_size = size;
+					}
+					break;
+				}
+				default:
+					*out_size = 0;
+					break;
+			}
+		}
+	} else {
 		uint8_t   red      = 0;
 		uint8_t   green    = 0;
 		uint8_t   blue     = 0;
@@ -82,7 +69,7 @@ util_get_enclosure_color_str(char * const out_str, uint8_t len, uint8_t *out_siz
 		if (kIOReturnSuccess == rGetDeviceColor)
 		{
 			int size = snprintf(out_str, len, "%u,%u,%u", red, green, blue);
-			if (size > 0 && size < len) {
+			if (size < len) {
 				color_type = util_enclosure_color_rgb;
 				*out_size = size;
 			}

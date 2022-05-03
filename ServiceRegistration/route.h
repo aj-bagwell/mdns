@@ -59,9 +59,6 @@ struct interface {
     // Wakeup event to detect that vicarious router discovery is complete
     wakeup_t *NULLABLE vicarious_discovery_complete;
 
-    // Wakeup event to periodically notice whether routers we have heard previously on this interface have gone stale.
-    wakeup_t *NULLABLE stale_evaluation_wakeup;
-
     // List of ICMP messages from different routers.
     icmp_message_t *NULLABLE routers;
 
@@ -138,15 +135,6 @@ struct interface {
     // and are waiting 20 seconds to snoop for replies to that RD message that are
     // multicast.   If we hear no replies during that time, we trigger router discovery.
     bool vicarious_router_discovery_in_progress;
-
-    // Indicates that we have received an interface removal event, it is useful when srp-mdns-proxy is changed to a new
-    // network where the network signature are the same and they both have no IPv6 service (so no IPv6 prefix will be
-    // removed), in such case there will be no change from srp-mdns-proxy's point of view. However, configd may still
-    // flush the IPv6 routing since changing network would cause interface up/down. When the flushing happens,
-    // srp-mdns-proxy should be able to reconfigure the IPv6 routing by reconfiguring IPv6 prefix. By setting
-    // need_reconfigure_prefix only when interface address removal happens and check it during the routing evaluation
-    // srp-mdns-proxy can reconfigure it after the routing evaluation finishes, like router discovery.
-    bool need_reconfigure_prefix;
 };
 
 typedef enum icmp_option_type {
@@ -201,8 +189,9 @@ struct icmp_message {
     icmp_message_t *NULLABLE next;
     interface_t *NULLABLE interface;
     icmp_option_t *NULLABLE options;
-    bool new_router;                     // If this router information is a newly recevied one.
-    bool received_time_already_adjusted; // if the received time of the message is already adjusted by vicarious mode
+    bool new_router;                // If this router information is a newly recevied one.
+    bool received_time_already_adjusted;    // if the received time of the message is already adjusted by
+                                                    // vicarious mode
     struct in6_addr source;
     struct in6_addr destination;
 

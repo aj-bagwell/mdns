@@ -5090,11 +5090,6 @@
 				INSTALL_PATH = /usr/sbin;
 				LIBRARY_SEARCH_PATHS = "\"${CONFIGURATION_TEMP_DIR}\"";
 				ORDER_FILE = "${SRCROOT}/mDNSResponder.order";
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				OTHER_LDFLAGS = "";
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"-weak_framework",
@@ -5151,11 +5146,6 @@
 				);
 				INSTALL_PATH = /usr/sbin;
 				LIBRARY_SEARCH_PATHS = "\"${CONFIGURATION_TEMP_DIR}\"";
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				"OTHER_LDFLAGS[sdk=macosx*]" = (
 					"-weak_framework",
 					SetupAssistantFramework,
@@ -5235,11 +5225,6 @@
 				BUNDLE_LOADER = /usr/libexec/UserEventAgent;
 				INFOPLIST_FILE = "BonjourEvents-Info.plist";
 				INSTALL_PATH = /System/Library/UserEventPlugins/;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				PRODUCT_NAME = BonjourEvents;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = plugin;
@@ -5686,11 +5671,6 @@
 				BUNDLE_LOADER = /usr/libexec/UserEventAgent;
 				INFOPLIST_FILE = "BonjourEvents-Info.plist";
 				INSTALL_PATH = /System/Library/UserEventPlugins/;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				PRODUCT_NAME = BonjourEvents;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = plugin;
@@ -5773,11 +5753,6 @@
 				);
 				INSTALL_PATH = /usr/sbin;
 				LIBRARY_SEARCH_PATHS = "\"${CONFIGURATION_TEMP_DIR}\"";
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				"OTHER_LDFLAGS[sdk=macosx*]" = (
 					"-weak_framework",
 					SetupAssistantFramework,
@@ -7445,11 +7420,6 @@
 				INSTALL_PATH = /usr/lib/log;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx.internal;
 				SKIP_INSTALL = NO;
@@ -7562,11 +7532,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx.internal;
 				SKIP_INSTALL = NO;
@@ -8131,11 +8096,6 @@
 				INSTALL_PATH = /usr/sbin;
 				LIBRARY_SEARCH_PATHS = "\"${CONFIGURATION_TEMP_DIR}\"";
 				ORDER_FILE = "${SRCROOT}/mDNSResponder.order";
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				OTHER_LDFLAGS = "";
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = (
 					"-weak_framework",
@@ -8296,11 +8256,6 @@
 				INSTALL_PATH = /usr/lib/log;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx.internal;
 				SKIP_INSTALL = NO;
@@ -8363,11 +8318,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-ftrivial-auto-var-init=zero",
-					"-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx.internal;
 				SKIP_INSTALL = NO;
